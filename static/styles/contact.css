@@ -1,0 +1,53 @@
+.contact-body{
+    background: url('../images/contact.jpg');
+    height: 90vh;
+    width: 100vw;
+    background-size: cover;
+    background-position: center;
+    position: absolute;
+    color: black;
+}
+
+.contact-info{
+    background-color: rgba(25, 25, 25, 0.8);
+    width: 400px;
+    height: 400px;
+    margin-top: 100px;
+    margin-left: 100px;
+    color: white;
+    padding-top: 30px;
+}
+
+.contact-info{
+    display: block;
+    align-items: center;
+    text-align: center;
+}
+
+.outer-info{
+    margin-top: 60px;
+    font-size: 25px; 
+    font-weight: bold;
+}
+
+.inner-info{
+    font-size: 20px;
+}
+
+
+/* Responsive Design */
+@media screen and (max-width: 768px){
+
+    .contact-info{
+        align-items: center;
+        width: 80vw;
+        height: 60vh;
+        margin-top: 10vh;
+        margin-left: 10vw;
+        padding-top: 5vh;
+    }
+
+
+}
+
+

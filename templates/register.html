@@ -1,0 +1,32 @@
+{% extends 'base.html' %} 
+{% from 'form_helper.html' import displayField %}
+
+<!-- Title -->
+{% block title %}Registration{% endblock %}
+
+<!-- Body Content -->
+{% block content %}
+<div id="register">
+  <form action="{{ url_for('register') }}" method="POST" class='box'>
+    <h1>Register</h1>
+
+    <!-- Username -->
+    {{ displayField(form.username, 'Username', autofocus=true,
+    autocomplete='off') }}
+
+    <!-- Password -->
+    {{ displayField(form.password, 'Password') }}
+
+    <!-- Confirm Password -->
+    {{ displayField(form.confirm_pswd, 'Retype Password') }}
+
+    <!-- Submit Button -->
+    <div>{{ form.submit_button }}</div>
+
+    <span class="question">Already have an account?</span>
+    <a class='redirect' href="{{ url_for('login') }}">Login here</a>
+
+    {{ form.csrf_token }}
+  </form>
+</div>
+{% endblock %}

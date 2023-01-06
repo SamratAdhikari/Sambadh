@@ -1,0 +1,59 @@
+{% extends 'base.html' %}
+
+<!-- Title -->
+{% block title %}Chat{% endblock %}
+
+<!-- Body -->
+{% block content %}
+
+<!-- Navigation bar -->
+<nav></nav>
+
+<div id="main-section">
+  <!-- Room Selection -->
+  <nav id="sidebar">
+    <!-- burger button -->
+    <!-- <ul>
+      <li><a href="#"><i class='fas fa-qrcode'></i></a></li>
+    </ul> -->
+
+
+    <!-- Rooms -->
+    <h2 id='room-title'>ROOMS</h2>
+    {% for room in rooms %}
+    <p class="select-room">{{ room|title }}</p>
+    {% endfor %}
+
+    <!-- Logout Button -->
+    <a id='logout-btn' href="{{url_for('logout')}}">Logout</a>
+
+
+  </nav>
+  
+
+
+  <!-- Message area -->
+  <div id="rightside-pannel">
+    <div class="display-message-section"></div>
+
+    <!-- Input Message -->
+    <div id="input-area">
+      <input
+        type="text"
+        id="user-message"
+        placeholder="Type here..."
+        autocomplete="off"
+      />
+      <button type="button" id="send-message">SEND</button>
+    </div>
+  </div>
+</div>
+
+<!-- Javascript -->
+<script src="{{ url_for('static', filename='scripts/chat_page.js') }}"></script>
+
+<script type="text/javascript">
+  const username = `{{ username }}`;
+</script>
+
+{% endblock %}

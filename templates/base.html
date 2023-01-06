@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"
+    />
+    <meta name="HandheldFriendly" content="true" />
+
+    <!-- CSS -->
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap"
+      rel="stylesheet"
+    />
+
+    <!--  Main Custom CSS  -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/main.css') }}"
+    />
+
+    <!-- Symbols -->
+    <link
+      href="https://fonts.googleapis.com/icon?family=Material+Icons"
+      rel="stylesheet"
+    />
+
+    <!-- Css for Index Page -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/index.css') }}"
+    />
+
+    <!-- Css for Contact Page -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/contact.css') }}"
+    />
+
+    <!-- CSS for Login and Register Pages -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/forms.css') }}"
+    />
+
+    <!-- CSS for Chat Page -->
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles/chat.css') }}"
+    />
+
+    <!-- CSS for Chat Hamburger -->
+    <script
+      src="https://kit.fontawesome.com/yourcode.js"
+      crossorigin="anonymous"
+    ></script>
+
+    <title>{% block title %}{% endblock %} | Sambadh</title>
+  </head>
+
+  <body>
+    <!-- Navigation bar -->
+    <nav class="navigation">
+      <div class="hamburger">
+        <div class="line"></div>
+        <div class="line"></div>
+        <div class="line"></div>
+      </div>
+      <ul class="nav-links">
+        <li><a href="{{url_for('index')}}">Home</a></li>
+        <li><a href="{{url_for('register')}}">Register</a></li>
+        <li><a href="{{url_for('login')}}">Login</a></li>
+        <li><a href="{{url_for('chat')}}">Chat</a></li>
+        <li class="contact"><a href="{{url_for('contact')}}">Contact</a></li>
+      </ul>
+    </nav>
+
+    <!-- Message Flashing -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+
+    <!-- If there are messages -->
+    {% if messages %}
+
+    <div class="flash-alert">
+      <!-- Show message -->
+      <!-- ('category', 'message')  -->
+      {% if messages[0][0] == 'danger' %}
+      <div class="danger">{{ messages[0][1] }}</div>
+
+      {% elif messages[0][0] == 'success' %}
+      <div class="success">{{ messages[0][1] }}</div>
+    </div>
+
+    <!-- Close if else condition -->
+    {% endif %} {% endif %}
+
+    <!-- Close with statement -->
+    {% endwith %}
+
+    <!-- Body template -->
+    {% block content %} {% endblock %}
+  </body>
+
+  <!-- Javascript -->
+  <!-- Navbar Js -->
+  <script src="{{ url_for('static', filename='scripts/burger.js') }}"></script>
+
+  <!-- Get username -->
+  <script type="text/javascript">
+    const username = `{{ username }}`;
+  </script>
+
+  <!-- SocketIO JS -->
+  <script
+    type="text/javascript"
+    src="//cdnjs.cloudflare.com/ajax/libs/socket.io/2.2.0/socket.io.js"
+    integrity="sha256-yr4fRk/GU1ehYJPAs8P4JlTgu0Hdsp4ZKrx8bDEDC3I="
+    crossorigin="anonymous"
+  ></script>
+
+  <!-- Custom SocketIO JS -->
+  <script src="{{ url_for('static', filename='scripts/socketio.js') }}"></script>
+</html>

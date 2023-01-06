@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+<!-- Title -->
+{% block title %}Home{% endblock %}
+
+<!-- Body Content -->
+{% block content %}
+<div class="container">
+  <div class="info-area">
+    <span id="text" class="title">Sambadh</span>
+    <p>A chatting app for the gentles.</p>
+
+    <div class="area-redirect">
+      <span id="text" class="subtitle">Get Started</span>
+
+      <div class="index-buttons">
+        <a href="{{ url_for('register') }}">Register</a>
+        <a id="short-anchor" href="{{ url_for('login') }}"> Login </a>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}

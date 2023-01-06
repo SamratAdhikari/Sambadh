@@ -1,0 +1,228 @@
+/* -----------------Main Section-------------- */
+#main-section {
+  display: flex;
+  overflow: hidden; /* Makee this div contain its floated children */
+  width: 100%;
+  height: 90vh;
+  background-color: white;
+}
+
+/* -------------------Side Bar--------------------- */
+/* Room container */
+#sidebar {
+  /* float: left; */
+  width: 20vw;
+  height: 100%; /* universal */
+  background-color: #798ea4;
+  text-align: center;
+  z-index: 0;
+}
+
+/* Room Header */
+#sidebar #room-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: rgb(70, 7, 112);
+}
+
+/* Room List */
+.select-room {
+  padding: 3px;
+  cursor: pointer;
+  font-size: 20px;
+  font-weight: bold;
+  margin-top: 10px;
+  line-height: 10vh;
+}
+
+.select-room:hover {
+  color: #ffc107;
+}
+
+/* Logout button */
+#logout-btn {
+  text-decoration: none;
+  font-size: 20px;
+  margin: auto;
+  bottom: 0px;
+  padding: 10px;
+  border-radius: 7px;
+  background-color: #f44336;
+  color: white;
+  font-weight: bold;
+}
+
+#logout-btn:hover {
+  background-color: black;
+}
+
+/* --------------------------Message Area----------------- */
+#rightside-pannel {
+  overflow: hidden; /* Make this div take up the rest of the horizontal space, and no more */
+}
+
+.display-message-section {
+  height: 70vh; /* universal */
+  margin: 20px; /* universal */
+  width: 75vw;
+  /* border: 2px solid #3498db; */
+  border-radius: 10px;
+  overflow: auto;
+}
+
+/* -------------------Input Area--------------------- */
+#input-area {
+  padding-left: 1em;
+  padding-right: 1em;
+  bottom: 0;
+}
+
+#user-message {
+  height: 9vh;
+  border-radius: 10px;
+  width: 60vw;
+  font-size: 20px;
+  margin-right: 0;
+}
+
+#send-message {
+  height: 10vh;
+  margin-left: 3px;
+  width: 13vw;
+  background-color: #21a358;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+/* -----------------Elements inside Display Message Area------------ */
+@keyframes fadeIn {
+  0% {opacity: 0;}
+  100% {opacity: 1;}
+}
+
+.my-input {
+  border: 2px solid #3498db;
+  background-color: #ADD8E6;
+  width: 40%;
+  border-radius: 7px;
+  padding: 3px;
+  right:0;          
+  top:0;
+  margin-right: 0px;
+  margin-left: auto;
+  /* animation */
+  animation-name: fadeIn;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.other-input {
+  border: 2px solid #3498db;
+  left: 0px;
+  width: 40%;
+  border-radius: 7px;
+  padding: 3px;
+  /* animation */
+  animation-name: fadeIn;
+  animation-duration: 0.75s;
+  animation-fill-mode: forwards;
+  animation-timing-function: ease-in-out;
+}
+
+.username{
+  font-weight: bold;
+  font-size: 1em;
+  color: black;
+}
+
+.timestamp{
+  color: #656d78;
+  font-size:0.7em;
+}
+
+.system-msg {
+  text-align: center;
+  color: grey;
+  width: auto;
+  font-size:0.9em;
+}
+
+.nav-burger{
+  display: none;
+}
+
+
+/* ------------------Responsive Design---------------------- */
+@media screen and (max-width: 768px) {
+
+#sidebar{
+  /* display: flex; */
+  justify-content: center;
+  align-items: center;
+  transition: all .5s ease-in-out;
+  width: 35%;
+}
+
+#sidebar #room-title{
+  font-size: 3vh;
+}
+
+.select-room{
+  font-size: 1rem;
+  line-height: 7vh;
+}
+
+.display-message-section{
+  width: 70%;
+  padding:0px;
+}
+
+#rightside-pannel{
+  width: 70%;
+  margin: 0;
+}
+
+#user-message{
+
+  height: 5vh;
+  width: 40vw;
+  font-size: 2vh;
+}
+
+#send-message {
+  height: 5vh;
+  margin-left: 3px;
+  width: 11vw;
+  font-size: 1.3vh;
+}
+
+#logout-btn {
+  text-decoration: none;
+  font-size: 1rem;
+  margin: auto;
+  bottom: 0px;
+  padding: 10px;
+
+/* 
+
+
+.nav-burger{
+  display: block;
+  font-weight: bold;
+  font-size: 0.9em;
+  color: red;
+} */
+
+
+
+
+
+
+
+
+
+}
