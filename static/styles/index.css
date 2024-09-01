@@ -1,47 +1,48 @@
-.container{
-    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('../images/index.jpg');
+.container {
+    background: linear-gradient(rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5)),
+        url("../images/index.jpg");
     height: 90vh;
     width: 100vw;
     background-size: cover;
     background-position: center;
 }
 
-.info-area{
-    text-align: center; 
+.info-area {
+    text-align: center;
     /* align-items: center; */
     width: 50%;
     padding-top: 15vh;
-} 
+}
 
-
-.title{
-    font-family: 'Ubuntu';
+.title {
+    font-family: "Ubuntu";
     font-size: 4rem;
     font-weight: bold;
     color: white;
     margin: 10vw;
-
 }
 
-.info-area p{
-    font-size: 2rem;
+.info-area p {
+    font-size: 1rem;
     color: white;
+    width: 80%;
+    margin-left: 10%;
 }
 
-.info-area .area-redirect{
+.info-area .area-redirect {
     margin-top: 10vh;
 }
 
-.subtitle{
+.subtitle {
     color: white;
     font-size: 3rem;
 }
 
-.index-buttons{
+.index-buttons {
     margin-top: 3vh;
 }
 
-.index-buttons a{
+.index-buttons a {
     color: white;
     text-decoration: none;
     font-size: 2rem;
@@ -52,46 +53,44 @@
     transition: 0.6s ease;
 }
 
-#short-anchor{
+#short-anchor {
     padding: 1rem 23px;
 }
 
-.index-buttons a:hover{
+.index-buttons a:hover {
     background-color: white;
     color: black;
 }
 
-
-@media screen and (max-width: 700px){
-
-    .info-area{
-        text-align: center; 
+@media screen and (max-width: 700px) {
+    .info-area {
+        text-align: center;
         /* align-items: center; */
         padding-top: 6vh;
     }
 
-    .info-area .title{
-        font-family: 'Ubuntu';
+    .info-area .title {
+        font-family: "Ubuntu";
         font-size: 10vw;
         font-weight: bold;
         margin: 2vh 0vh 1vh 3vh;
     }
 
-    .info-area p{
+    .info-area p {
         text-align: center;
         margin-left: 10vw;
         font-size: 7vw;
     }
 
-    .subtitle{
+    .subtitle {
         font-size: 6vw;
     }
 
-    .index-buttons{
+    .index-buttons {
         margin-top: 3vh;
     }
-    
-    .index-buttons a{
+
+    .index-buttons a {
         text-decoration: none;
         font-size: 13px;
         padding: 1vh;
@@ -99,14 +98,7 @@
         transition: 0.6s ease;
     }
 
-    #short-anchor{
+    #short-anchor {
         padding: 1vh 1rem;
     }
-
-
-
-
-
-
-
 }
