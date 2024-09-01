@@ -6,18 +6,22 @@
 <!-- Body Content -->
 {% block content %}
 <div class="container">
-  <div class="info-area">
-    <span id="text" class="title">Sambadh</span>
-    <p>A chatting app for the gentles.</p>
+    <div class="info-area">
+        <span id="text" class="title">Sambadh</span>
+        <p>
+            ❝Sambadh is an elegant chat application designed for the modern
+            gentleman, offering a refined and secure space to connect, converse,
+            and cultivate meaningful conversations in style.
+        </p>
 
-    <div class="area-redirect">
-      <span id="text" class="subtitle">Get Started</span>
+        <div class="area-redirect">
+            <span id="text" class="subtitle">Get Started</span>
 
-      <div class="index-buttons">
-        <a href="{{ url_for('register') }}">Register</a>
-        <a id="short-anchor" href="{{ url_for('login') }}"> Login </a>
-      </div>
+            <div class="index-buttons">
+                <a href="{{ url_for('register') }}">Register</a>
+                <a id="short-anchor" href="{{ url_for('login') }}"> Login </a>
+            </div>
+        </div>
     </div>
-  </div>
 </div>
 {% endblock %}
