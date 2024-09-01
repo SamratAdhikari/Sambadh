@@ -14,6 +14,9 @@ from time import strftime, localtime
 from passlib.hash import pbkdf2_sha256 as hashpass
 import os
 
+from gevent import monkey
+monkey.patch_all()
+
 # ---------------------Custom Modules---------------------
 from fields import RegistrationForm, LoginForm
 from models import db, User
@@ -32,7 +35,7 @@ db.init_app(app)
 migrate = Migrate(app, db)
 
 # -----------------------Initialize Flask-SocketIO--------------------
-socketio = SocketIO(app)
+socketio = SocketIO(app, async_mode='gevent')
 ROOMS = ['global', 'backbenchers', 'personal', 'coding']
 
 # -------------------Configure flask login----------------------------
