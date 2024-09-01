@@ -9,12 +9,13 @@ from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 from flask_socketio import SocketIO, send, join_room, leave_room
 from flask_migrate import Migrate
-from time import localtime, strftime
 from dotenv import load_dotenv
+from time import strftime, localtime
+from passlib.hash import pbkdf2_sha256 as hashpass
 import os
 
 # ---------------------Custom Modules---------------------
-from fields import *
+from fields import RegistrationForm, LoginForm
 from models import db, User
 
 # -----------------Initialize flask app------------------
@@ -59,8 +60,8 @@ def register():
         hashed_pswd = hashpass.hash(password)
 
         # Add user to the database
-        user = User(username=username, password=hashed_pswd)
         with app.app_context():
+            user = User(username=username, password=hashed_pswd)
             db.session.add(user)
             db.session.commit()
 
@@ -74,8 +75,7 @@ def login():
     login_form = LoginForm()
 
     if login_form.validate_on_submit():
-        user_object = User.query.filter_by(
-            username=login_form.username.data).first()
+        user_object = User.query.filter_by(username=login_form.username.data).first()
         
         if user_object and hashpass.verify(login_form.password.data, user_object.password):
             login_user(user_object)
@@ -104,22 +104,20 @@ def logout():
 def message(data):
     """Broadcast messages"""
     time_stamp = strftime('%b-%d %I:%M %p', localtime())
-    send({'msg': data['msg'], 'username': data['username'],
-          'time_stamp': time_stamp}, room=data['room'])
+    send({'msg': data['msg'], 'username': data['username'], 'time_stamp': time_stamp}, room=data['room'])
 
 @socketio.on('join')
 def join(data):
     join_room(data['room'])
     if data['username']:
-        send({'msg': data['username'] + " has joined the " +
-              data['room'] + " room."}, room=data['room'])
+        send({'msg': f"{data['username']} has joined the {data['room']} room."}, room=data['room'])
 
 @socketio.on('leave')
 def leave(data):
     leave_room(data['room'])
-    send({'msg': data['username'] + " has left the " +
-          data['room'] + " room."}, room=data['room'])
+    send({'msg': f"{data['username']} has left the {data['room']} room."}, room=data['room'])
 
 # --------------------------Run the program------------------------
 if __name__ == '__main__':
     socketio.run(app)
+    # app.run(debug=True)

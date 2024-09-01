@@ -7,7 +7,6 @@ from models import User
 # Custom validator for Login Form
 def invalid_credentials(form, field):
     """ User and password checker """
-
     username_entered = form.username.data
     password_entered = field.data
 
@@ -31,7 +30,6 @@ class RegistrationForm(FlaskForm):
 
     submit_button = SubmitField("Create")
 
-    # Custom validator for username uniqueness
     def validate_username(self, username):
         user_object = User.query.filter_by(username=username.data).first()
         if user_object:
