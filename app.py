@@ -10,6 +10,7 @@ from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
 from flask_socketio import SocketIO, send, emit, join_room, leave_room
 from time import localtime, strftime
+from dotenv import load_dotenv
 import os
 
 # ---------------------Custom Modules---------------------
@@ -18,14 +19,13 @@ from models import *
 
 
 # -----------------Initialize flask app------------------
+load_dotenv()
 app = Flask(__name__)
-# app.secret_key = os.environ.get('SECRET')
-app.secret_key = 'secret key'
+app.secret_key = os.environ.get('SECRET_KEY')
 
 
 # ---------------------Configure database---------------------
-# app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
-app.config['SQLALCHEMY_DATABASE_URI'] = 'postgres://zehechgavwbcuh:d890a5f6d43d39fc3ca182eeee804276f6fe07b5657a8a0429d5749692ebdb6c@ec2-52-7-115-250.compute-1.amazonaws.com:5432/dcfi239smvt38i'
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
@@ -149,5 +149,5 @@ def leave(data):
 
 # --------------------------Run the program------------------------
 if __name__ == '__main__':
-    # app.run()
-    socketio.run(app)
+    app.run(debug=True)
+    # socketio.run(app)

@@ -14,14 +14,4 @@ class User(UserMixin, db.Model):
     username = db.Column(db.String(25), unique=True, nullable=False)
     password = db.Column(db.String(25), nullable=False)
 
-# db.create_all()
-
-
-# -------------------- Save Message History------------------
-class History(db.Model):
-    """ Save Chat History """
-
-    id = db.Column(db.Integer, primary_key=True)
-    message = db.Column('message', db.String(500))
-
-    # db.create_all()
+db.create_all()
