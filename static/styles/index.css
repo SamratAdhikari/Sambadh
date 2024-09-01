@@ -22,15 +22,15 @@
     margin: 10vw;
 }
 
+.info-area .area-redirect {
+    margin-top: 10vh;
+}
+
 .info-area p {
-    font-size: 1rem;
+    font-size: 1.6rem;
     color: white;
     width: 80%;
     margin-left: 10%;
-}
-
-.info-area .area-redirect {
-    margin-top: 10vh;
 }
 
 .subtitle {
