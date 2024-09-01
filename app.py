@@ -4,57 +4,50 @@ Date    : 14 March 2021
 Purpose : Educational Purpose
 '''
 
-
 # ---------------------Modules------------------------------
 from flask import Flask, render_template, redirect, url_for, flash
 from flask_login import LoginManager, login_user, current_user, login_required, logout_user
-from flask_socketio import SocketIO, send, emit, join_room, leave_room
+from flask_socketio import SocketIO, send, join_room, leave_room
+from flask_migrate import Migrate
 from time import localtime, strftime
 from dotenv import load_dotenv
 import os
 
 # ---------------------Custom Modules---------------------
 from fields import *
-from models import *
-
+from models import db, User
 
 # -----------------Initialize flask app------------------
 load_dotenv()
 app = Flask(__name__)
 app.secret_key = os.environ.get('SECRET_KEY')
 
-
 # ---------------------Configure database---------------------
 app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL')
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-db = SQLAlchemy(app)
 
+# Initialize SQLAlchemy and Flask-Migrate
+db.init_app(app)
+migrate = Migrate(app, db)
 
 # -----------------------Initialize Flask-SocketIO--------------------
 socketio = SocketIO(app)
 ROOMS = ['global', 'backbenchers', 'personal', 'coding']
 
-
 # -------------------Configure flask login----------------------------
 login = LoginManager(app)
 login.init_app(app)
 
-
 # -------------------For user login authentication--------------------
 @login.user_loader
-def load_user(id):
-
-    return User.query.get(int(id))
-
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 # -------------------------------Routes-------------------------------
-# Route for index/home
 @app.route('/')
 def index():
     return render_template('index.html')
 
-
-# Route for registration page
 @app.route('/register', methods=['GET', 'POST'])
 def register():
     reg_form = RegistrationForm()
@@ -62,92 +55,71 @@ def register():
         username = reg_form.username.data
         password = reg_form.password.data
 
+        # Hash the password
         hashed_pswd = hashpass.hash(password)
-        # hashpass.using(rounds=29000, salt_size=16).hash(password)
 
-        # Add user to database
+        # Add user to the database
         user = User(username=username, password=hashed_pswd)
-        db.session.add(user)
-        db.session.commit()
+        with app.app_context():
+            db.session.add(user)
+            db.session.commit()
 
         flash('Registered Successfully', 'success')
         return redirect(url_for('login'))
 
     return render_template('register.html', form=reg_form)
 
-
-# Route for Login Page
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     login_form = LoginForm()
 
-    # Allow login if validation is success
     if login_form.validate_on_submit():
         user_object = User.query.filter_by(
             username=login_form.username.data).first()
-        login_user(user_object)
-
-        return redirect(url_for('chat'))
+        
+        if user_object and hashpass.verify(login_form.password.data, user_object.password):
+            login_user(user_object)
+            return redirect(url_for('chat'))
+        else:
+            flash('Invalid username or password', 'danger')
 
     return render_template('login.html', form=login_form)
 
-
-# Route for Chat Page
 @app.route('/chat', methods=['GET', 'POST'])
-# @login_required
+@login_required
 def chat():
-
-    if not current_user.is_authenticated:
-        flash('Please Login first', 'danger')
-        return redirect(url_for('login'))
-
     return render_template('chat.html', username=current_user.username, rooms=ROOMS)
 
-
-# Route for contact
 @app.route('/contact')
 def contact():
     return render_template('contact.html')
 
-
-# Route to Logout
 @app.route('/logout', methods=['GET'])
 def logout():
-
     logout_user()
     return redirect(url_for('index'))
 
-
 # ------------------- SocketIO Event Buckets/Handlers--------------
-# Message bucket
 @socketio.on('message')
 def message(data):
     """Broadcast messages"""
-    # print(f"\n\n\n{data}\n\n\n")
     time_stamp = strftime('%b-%d %I:%M %p', localtime())
     send({'msg': data['msg'], 'username': data['username'],
           'time_stamp': time_stamp}, room=data['room'])
 
-
-# Join a room
 @socketio.on('join')
 def join(data):
-
     join_room(data['room'])
-    if data['username'] != '':
+    if data['username']:
         send({'msg': data['username'] + " has joined the " +
               data['room'] + " room."}, room=data['room'])
 
-# Leave a room
 @socketio.on('leave')
 def leave(data):
-
     leave_room(data['room'])
     send({'msg': data['username'] + " has left the " +
           data['room'] + " room."}, room=data['room'])
 
-
 # --------------------------Run the program------------------------
 if __name__ == '__main__':
-    # app.run(debug=True)
     socketio.run(app)
