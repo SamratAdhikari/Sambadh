@@ -1,6 +1,6 @@
-.contact-body{
-    background: url('../images/contact.jpg');
-    height: 90vh;
+.contact-body {
+    background: url("../images/contact.jpg");
+    height: 120vh;
     width: 100vw;
     background-size: cover;
     background-position: center;
@@ -8,7 +8,7 @@
     color: black;
 }
 
-.contact-info{
+.contact-info {
     background-color: rgba(25, 25, 25, 0.8);
     width: 400px;
     height: 400px;
@@ -18,27 +18,30 @@
     padding-top: 30px;
 }
 
-.contact-info{
+.contact-info {
     display: block;
     align-items: center;
     text-align: center;
 }
 
-.outer-info{
+.outer-info {
     margin-top: 60px;
-    font-size: 25px; 
+    font-size: 25px;
     font-weight: bold;
 }
 
-.inner-info{
+.inner-info {
     font-size: 20px;
 }
 
+.inner-info > a {
+    text-decoration: none;
+    color: beige;
+}
 
 /* Responsive Design */
-@media screen and (max-width: 768px){
-
-    .contact-info{
+@media screen and (max-width: 768px) {
+    .contact-info {
         align-items: center;
         width: 80vw;
         height: 60vh;
@@ -46,8 +49,4 @@
         margin-left: 10vw;
         padding-top: 5vh;
     }
-
-
 }
-
-
