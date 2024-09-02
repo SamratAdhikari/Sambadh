@@ -5,7 +5,7 @@
     background-size: cover;
     background-position: center;
     position: absolute;
-    color: black;
+    color: rgb(240, 236, 236);
 }
 
 .contact-info {
@@ -44,7 +44,7 @@
     .contact-info {
         align-items: center;
         width: 80vw;
-        height: 60vh;
+        height: 80vh;
         margin-top: 10vh;
         margin-left: 10vw;
         padding-top: 5vh;
