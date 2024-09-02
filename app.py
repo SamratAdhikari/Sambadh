@@ -122,5 +122,5 @@ def leave(data):
 
 # --------------------------Run the program------------------------
 if __name__ == '__main__':
-    # socketio.run(app)
-    app.run(debug=True)
+    socketio.run(app)
+    # app.run(debug=True)
