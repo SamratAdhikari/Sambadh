@@ -10,8 +10,8 @@
 
 .contact-info {
     background-color: rgba(25, 25, 25, 0.8);
-    width: 400px;
-    height: 500px;
+    width: 454px;
+    height: 550px;
     margin-top: 100px;
     margin-left: 100px;
     color: white;
@@ -35,8 +35,21 @@
 }
 
 .inner-info > a {
-    text-decoration: none;
-    color: beige;
+    text-decoration: none; /* Removes the underline */
+    color: white; /* Sets the color to white */
+}
+
+.inner-info > a:visited {
+    color: white; /* Ensures the color stays white after clicking */
+}
+
+.inner-info > a:hover {
+    text-decoration: none; /* Keeps the underline removed on hover */
+}
+
+.inner-info > a:active {
+    text-decoration: none; /* Keeps the underline removed when active */
+    color: white; /* Maintains white color on click */
 }
 
 /* Responsive Design */
