@@ -36,7 +36,7 @@ migrate = Migrate(app, db)
 
 # -----------------------Initialize Flask-SocketIO--------------------
 socketio = SocketIO(app, async_mode='gevent')
-ROOMS = ['global', 'backbenchers', 'personal', 'coding']
+ROOMS = ['global', 'tech', 'history', 'philosophy', 'space']
 
 # -------------------Configure flask login----------------------------
 login = LoginManager(app)
